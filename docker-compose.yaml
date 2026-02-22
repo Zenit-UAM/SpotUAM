@@ -1,0 +1,61 @@
+services:
+  backend:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    container_name: backend-1
+    environment:
+      - PORT=${BACKEND_PORT}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+    ports:
+      - "3000:${BACKEND_PORT}"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      database:
+        condition: service_healthy
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    container_name: frontend-1
+    environment:
+      - VITE_API_URL=http://localhost:${VITE_PORT}
+    ports:
+      - "${FRONTEND_PORT}:${VITE_PORT}"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      backend:
+        condition: service_started
+  database:
+    build:
+      context: ./backend/database/
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    container_name: database-1
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DB}
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    volumes:
+      - ./backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  database:
