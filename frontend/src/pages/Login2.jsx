@@ -49,7 +49,7 @@ export default function Login2() {
     }
   };
   return (
-    <div className="w-full min-h-screen">
+    <div className="min-h-screen flex flex-col">
       {/* HEADER */}
       <header className="bg-white shadow-sm px-6 pt-4 pb-2 flex justify-between items-center">
         <div className="flex items-center gap-2">
@@ -69,7 +69,7 @@ export default function Login2() {
       <div className="border-t border-gray-200"></div>
 
       {/* MAIN */}
-      <main className="bg-backgroundlightgray min-h-screen flex items-start justify-center pt-10">
+      <main className="bg-backgroundlightgray flex-1 flex items-start justify-center pt-10">
         <section className="bg-backgroundlight p-8 rounded-xl shadow-md max-w-md w-full">
 
           {/* HEADER DEL FORM */}
@@ -86,29 +86,48 @@ export default function Login2() {
           </header>
 
           {/* FORM */}
-          <form className="flex flex-col gap-3">
-            <label>Correo institucional</label>
-            <input
-              type="email"
-              className="shadow-md border border-gray-300 rounded px-4 py-2"
-              placeholder="nombre.apellido@cua.uam.mx"
-            />
+          <form className="flex flex-col gap-3" onSubmit={loginUsuario}>
+            <div className="flex flex-col items-start">
+              <label className="mb-1 text-sm font-semibold">Correo institucional</label>
+              <input
+                type="email"
+                className="w-full shadow-md border border-gray-300 rounded-xl px-4 py-2"
+                placeholder="nombre.apellido@cua.uam.mx"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                />
 
-            <label>Contraseña</label>
-            <input
-              type="password"
-              className="shadow-md border border-gray-300 rounded px-4 py-2"
-              placeholder="******"
-            />
+            </div>
+            <div className="flex flex-col items-start">
+              <label className="mb-1 text-sm font-semibold">Contraseña</label>
+              <input
+                type="password"
+                className="w-full shadow-md border border-gray-300 rounded-xl px-4 py-2"
+                placeholder="***********"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            {/* DIV PARA EL CHECKBOX DE SESION*/}
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                className="w-4 h-4 accent-primary cursor-pointer"
+                />
+              <p className="text-sm text-primary">
+                Recordar mi sesión
+              </p>
+            </div>
 
-            <button className="bg-primary text-white py-2 rounded mt-2">
-              Inicio de sesión
+            <button className="bg-primary text-white py-2 rounded-xl mt-1">
+              Iniciar sesión
             </button>
 
             <a href="#" className="text-primary text-sm text-center">
               ¿Olvidaste tu contraseña?
             </a>
-
+                  {/* Línea divisora */}
+            <div className="border-t border-gray-200"></div>
             <footer className="mt-4 text-center">
               <small>
                 Al iniciar sesión, aceptas los términos de uso y el aviso de
@@ -123,10 +142,21 @@ export default function Login2() {
       <div className="border-t border-gray-200"></div>
 
       {/* FOOTER */}
-      <footer className="bg-backgroundlightgray text-center py-4 text-sm text-gray-600">
-        <small>
-          2026 Zenit Universidad Autónoma Metropolitana - Unidad Cuajimalpa
-        </small>
+      <footer className="bg-backgroundlightgray py-4 text-sm text-gray-600">
+        <div className="w-full px-6 flex justify-between items-center ">
+          {/* IZQUIERDA */}
+          <small>
+            &copy; 2026 Zenit Universidad Autónoma Metropolitana - Unidad Cuajimalpa
+          </small>
+
+          {/* DERECHA */}
+          <ul className="flex gap-4">
+            <li><a href="#" className="hover:underline"><small>Privacidad</small></a></li>
+            <li><a href="#" className="hover:underline"><small>Términos</small></a></li>
+            <li><a href="#" className="hover:underline"><small>Contacto</small></a></li>
+          </ul>
+
+        </div>
       </footer>
     </div>
   );
