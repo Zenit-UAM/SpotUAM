@@ -1,8 +1,15 @@
+/* Make root full width so backgrounds and full-bleed sections can span the viewport */
 #root {
+  width: 100%;
+  padding: 0; /* reset global padding */
+  text-align: center;
+}
+
+/* Use this wrapper to center and limit content when needed */
+.app-container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
 
 .logo {

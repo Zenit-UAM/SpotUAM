@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Card, Button, Form, InputGroup } from "react-bootstrap";
 import { navigate } from "../Link.jsx";
+import logo from "../assets/logouamcuaji.png";
 // JSX PARA PROBAR LOS ESTILOS.
 export default function Login2() {
   const [email, setEmail] = useState("");
@@ -49,41 +49,85 @@ export default function Login2() {
     }
   };
   return (
-    <>
-      <header>
-        <img></img>
-        <a href="#">Ayuda tecnica</a>
+    <div className="w-full min-h-screen">
+      {/* HEADER */}
+      <header className="bg-white shadow-sm px-6 pt-4 pb-2 flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <img src={logo} alt="Logo" className="h-10 rounded-md" />
+          <h1 className="font-bold text-lg">SpotUAM</h1>
+        </div>
+
+        <a
+          href="#"
+          className="bg-primary text-white px-4 py-2 rounded"
+        >
+          Ayuda técnica
+        </a>
       </header>
-      <main>
-        <section>
-            <header>
-                <h1>
-                    Sistema de Reserva SpotUam Cuajimalpa
-                </h1>
-                <p>
-                    Acceso exclusivo para la comunidad universitaria
-                </p>
-            </header>
-            <section>
-                <form action="">
-                    <label htmlFor="">Correo insitucional</label>
-                    <input type="email" />
-                    <br></br>
-                    <label htmlFor="">Contraseña</label>
-                    <input type="password" />
-                    <button>Inicio de sesion</button>
-                </form>
-                <footer>
-                    <small>Al iniciar sesión, aceptas los terminos de uso y el aviso de provacidad institucional</small>
-                </footer>
-            </section>
+
+      {/* Línea divisora */}
+      <div className="border-t border-gray-200"></div>
+
+      {/* MAIN */}
+      <main className="bg-backgroundlightgray min-h-screen flex items-start justify-center pt-10">
+        <section className="bg-backgroundlight p-8 rounded-xl shadow-md max-w-md w-full">
+
+          {/* HEADER DEL FORM */}
+          <header className="mb-6 text-center flex flex-col items-center gap-2">
+            <img src={logo} alt="Logo" className="h-14 rounded-lg" />
+
+            <h2 className="text-xl font-bold">
+              Sistema de Reserva SpotUam Cuajimalpa
+            </h2>
+
+            <p className="text-sm text-gray-600">
+              Acceso exclusivo para la comunidad universitaria
+            </p>
+          </header>
+
+          {/* FORM */}
+          <form className="flex flex-col gap-3">
+            <label>Correo institucional</label>
+            <input
+              type="email"
+              className="shadow-md border border-gray-300 rounded px-4 py-2"
+              placeholder="nombre.apellido@cua.uam.mx"
+            />
+
+            <label>Contraseña</label>
+            <input
+              type="password"
+              className="shadow-md border border-gray-300 rounded px-4 py-2"
+              placeholder="******"
+            />
+
+            <button className="bg-primary text-white py-2 rounded mt-2">
+              Inicio de sesión
+            </button>
+
+            <a href="#" className="text-primary text-sm text-center">
+              ¿Olvidaste tu contraseña?
+            </a>
+
+            <footer className="mt-4 text-center">
+              <small>
+                Al iniciar sesión, aceptas los términos de uso y el aviso de
+                privacidad institucional
+              </small>
+            </footer>
+          </form>
         </section>
       </main>
-      <footer>
+
+      {/* Línea divisora */}
+      <div className="border-t border-gray-200"></div>
+
+      {/* FOOTER */}
+      <footer className="bg-backgroundlightgray text-center py-4 text-sm text-gray-600">
         <small>
-            2026 Zenit Universidad Autonoma Metropolitana - Unidad Cuajimalpa
+          2026 Zenit Universidad Autónoma Metropolitana - Unidad Cuajimalpa
         </small>
       </footer>
-    </>
+    </div>
   );
 }
