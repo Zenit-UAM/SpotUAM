@@ -45,27 +45,6 @@ function authHydrate(req, res, next) {
   next();
 }
 
-// app.use((req, res, next) => {
-//   const token = req.cookies.access_token;
-//   req.session = { user: null };
-//
-//   if (token) {
-//     console.log(
-//       "Cookie recibida correctamente: ",
-//       token.substring(0, 10) + "...",
-//     );
-//   }
-//
-//   try {
-//     const data = jwt.verify(token, process.env.ACCESS_SECRET_JWT_KEY);
-//     req.session.user = data;
-//   } catch (err) {
-//     // Token inválido o expirado, no hacemos nada
-//   }
-//
-//   next();
-// });
-
 app.get("/", authHydrate, (req, res) => {
   const { user } = req.session;
   res.render("index", user);

@@ -80,15 +80,17 @@ class Validation {
     if (typeof email !== "string") {
       throw new Error("The email must be a string");
     }
-    const regex = /@/;
+    // regex para verificar si el correo es de la uam cuajimalpa
+    const regex = /^[a-zA-Z0-9._%+-]+@cua\.uam\.mx$/;
     if (!regex.test(email)) {
-      throw new Error("The email must contain @");
+      throw new Error("The email must contain @cua.uam.mx");
     }
   }
   static password(password) {
     if (typeof password !== "string") {
       throw new Error("The password must be a string");
     }
+    // QUITAR ESTE COMENTARIO PARA CUANDO SE IMPLEMENTE EN LA REALIDAD, ESTO SE QUITA PARA LAS PRUEBAS
     // const regex =
     //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     //
