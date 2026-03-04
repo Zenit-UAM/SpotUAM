@@ -26,7 +26,7 @@ export default function Registro() {
         throw new Error(resultado.error || "Error al enviar");
       }
       alert(`Bienvenido ${resultado.username}, tu cuenta ha sido creada`);
-      navigate("/login-user");
+      navigate("/login");
     } catch (error) {
       console.error("Error en el registro:", error);
       alert(error.message);
@@ -84,7 +84,7 @@ export default function Registro() {
           <div>
             <p>
               ¿Ya tienes una cuenta?
-              <a href="/login-user">Inicia sesión</a>
+              <a href="/login">Inicia sesión</a>
             </p>
           </div>
         </Card.Body>

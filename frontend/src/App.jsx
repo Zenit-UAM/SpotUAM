@@ -3,7 +3,7 @@ import Registro from "./pages/Registro.jsx";
 import Login from "./pages/Login.jsx";
 import Inicio from "./pages/Inicio.jsx";
 import Logout from "./pages/Logout.jsx";
-import Login2 from "./pages/Login2.jsx"
+import Login2 from "./pages/Login.jsx"
 import { EVENTS } from "./consts.js";
 import { useEffect, useState } from "react";
 function App() {
@@ -26,10 +26,9 @@ function App() {
   return (
     <main>
       {currentPath === "/" && <Registro />}
-      {currentPath === "/login-user" && <Login />}
       {currentPath === "/home" && <Inicio />}
-      {currentPath === "/logout-user" && <Logout />}
-      {currentPath === "/login2" && <Login2/>}
+      {currentPath === "/logout" && <Logout />}
+      {currentPath === "/login" && <Login2/>}
     </main>
   );
 }

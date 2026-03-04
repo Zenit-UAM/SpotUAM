@@ -2,7 +2,7 @@ import { Card, Button, Form, InputGroup } from "react-bootstrap";
 import { navigate } from "../Link.jsx";
 export default function Inicio() {
   const irPaginaLogout = () => {
-    navigate("/logout-user", { protectedRoute: true });
+    navigate("/logout", { protectedRoute: true });
   };
   return (
     <main>
