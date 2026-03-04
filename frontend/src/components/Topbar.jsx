@@ -1,0 +1,50 @@
+import { FiSearch, FiBell, FiChevronDown } from 'react-icons/fi';
+
+// Recibimos la "prop" titulo. Si no nos mandan nada, por defecto dirá "Dashboard"
+export const Topbar = ({ titulo = "Dashboard" }) => {
+  return (
+    <div className="h-20 bg-white border-b border-gray-200 flex justify-between items-center px-8 w-full">
+      
+      {/* TÍTULO DINÁMICO */}
+      <h2 className="text-2xl font-bold text-gray-800">{titulo}</h2>
+
+      {/* CONTROLES DERECHOS */}
+      <div className="flex items-center gap-6">
+        
+        {/* 1. Buscador */}
+        <div className="relative">
+          <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
+          <input 
+            type="text" 
+            placeholder="Buscar espacios..." 
+            className="bg-gray-100 text-gray-700 pl-10 pr-4 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-primary w-72 transition-all"
+          />
+        </div>
+
+        {/* 2. Ícono de Notificaciones */}
+        <button className="relative text-gray-500 hover:text-primary transition-colors">
+          <FiBell className="text-2xl" />
+          {/* Indicador de notificación nueva (puntito rojo) */}
+          <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+        </button>
+
+        {/* 3. Línea separadora vertical */}
+        <div className="h-8 w-px bg-gray-300"></div>
+
+        {/* 4. Perfil de Usuario */}
+        <button className="flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors cursor-pointer">
+          <div className="text-right hidden md:block">
+            <p className="font-bold text-sm text-gray-800 leading-none">Daniel</p>
+            <p className="text-xs text-gray-500 mt-1">Estudiante</p>
+          </div>
+          {/* Círculo con la inicial del usuario */}
+          <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg">
+            D
+          </div>
+          <FiChevronDown className="text-gray-500" />
+        </button>
+
+      </div>
+    </div>
+  );
+};

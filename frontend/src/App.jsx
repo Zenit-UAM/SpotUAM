@@ -3,6 +3,8 @@ import Registro from "./pages/Registro.jsx";
 import Login from "./pages/Login.jsx";
 import Inicio from "./pages/Inicio.jsx";
 import Logout from "./pages/Logout.jsx";
+import Dashboard from "./pages/Dashboard.jsx"
+
 import { EVENTS } from "./consts.js";
 import { useEffect, useState } from "react";
 function App() {
