@@ -2,10 +2,15 @@ import { navigate } from '../Link.jsx';
 import { FiGrid, FiPlusSquare, FiClock, FiCalendar, FiHelpCircle, FiLogOut } from 'react-icons/fi';
 import logoUam from '../assets/logouamcuaji.png';
 import logoSpotUam from '../assets/logoSpotUAM.png';
-
+import DashboardIcon from './icons/DashboardIcon.jsx';
+import CalendarAddIcon from "./icons/CalendarAddIcon.jsx";
+import CalendarIcon from "../components/icons/CalendarIcon";
+import HistoryIcon from "../components/icons/HistoryIcon"
+import HelpCenterIcon from "../components/icons/HelpCenterIcon"
+import LogoutIcon from "../components/icons/LogoutIcon"
 export const Sidebar = () => {
-  const currentPath = window.location.pathname;
-  const isActive = (path) => currentPath === path;
+  //const currentPath = window.location.pathname;
+  //const isActive = (path) => currentPath === path;
 
   const handleNavigation = (path) => {
     navigate(path);
@@ -13,15 +18,15 @@ export const Sidebar = () => {
 
   return (
     <div className="w-64 h-screen bg-white border-r border-gray-200 flex flex-col justify-between">
-      
+
       <div>
         {/* SECCIÓN DE LOGOS (Reemplazo del texto anterior por los PNG) */}
         <div className="p-6 flex items-center gap-3">
-          
+
           {/* Logo UAM: Enlace Externo con etiqueta <a> */}
-          <a 
-            href="https://www.cua.uam.mx/" 
-            target="_blank" 
+          <a
+            href="https://www.cua.uam.mx/"
+            target="_blank"
             rel="noopener noreferrer"
             className="block hover:opacity-80 transition-opacity"
             title="Sitio oficial UAM Cuajimalpa"
@@ -30,7 +35,7 @@ export const Sidebar = () => {
           </a>
 
           {/* Logo SpotUAM: Enlace Interno al Dashboard */}
-          <button 
+          <button
             onClick={() => handleNavigation('/dashboard')}
             className="block hover:opacity-80 transition-opacity"
             title="Ir al inicio de SpotUAM"
@@ -41,51 +46,63 @@ export const Sidebar = () => {
 
         {/* NAVEGACIÓN PRINCIPAL */}
         <nav className="flex flex-col gap-2 px-4 mt-4">
-          
-          <button 
-            onClick={() => handleNavigation('/dashboard')} 
-            className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors text-left ${isActive('/dashboard') ? 'bg-orange-50 text-orange-600 border-l-4 border-orange-500' : 'text-gray-600 hover:bg-gray-50'}`}
+
+          <button
+            onClick={() => handleNavigation('/dashboard')}
+            className="group flex items-center gap-2 px-4 py-2 rounded text-black hover:bg-primary/20 hover:text-primary/80 transition"
           >
-            <FiGrid className="text-xl" /> Dashboard
+            <DashboardIcon
+              className="w-5 h-5 text-black group-hover:text-primary/80"
+            /> Dashboard
           </button>
 
-          <button 
-            onClick={() => handleNavigation('/reservar')} 
-            className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors text-left ${isActive('/reservar') ? 'bg-orange-50 text-orange-600 border-l-4 border-orange-500' : 'text-gray-600 hover:bg-gray-50'}`}
+          <button
+            onClick={() => handleNavigation('/reservar')}
+            className="group flex items-center gap-2 px-4 py-2 rounded text-black hover:bg-primary/20 hover:text-primary/80 transition"
           >
-            <FiPlusSquare className="text-xl" /> Reservar
+             <CalendarAddIcon
+                        className="w-5 h-5 text-black group-hover:text-primary/80"
+                    /> Reservar
           </button>
 
-          <button 
-            onClick={() => handleNavigation('/mis-reservas')} 
-            className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors text-left ${isActive('/mis-reservas') ? 'bg-orange-50 text-orange-600 border-l-4 border-orange-500' : 'text-gray-600 hover:bg-gray-50'}`}
+          <button
+            onClick={() => handleNavigation('/mis-reservas')}
+            className="group flex items-center gap-2 px-4 py-2 rounded text-black hover:bg-primary/20 hover:text-primary/80 transition"
           >
-            <FiClock className="text-xl" /> Mis reservas
+            <HistoryIcon
+                    className="w-5 h-5 text-black group-hover:text-primary/80"
+                /> Mis reservas
           </button>
 
-          <button 
-            onClick={() => handleNavigation('/calendario')} 
-            className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors text-left ${isActive('/calendario') ? 'bg-orange-50 text-orange-600 border-l-4 border-orange-500' : 'text-gray-600 hover:bg-gray-50'}`}
+          <button
+            onClick={() => handleNavigation('/calendario')}
+            className="group flex items-center gap-2 px-4 py-2 rounded text-black hover:bg-primary/20 hover:text-primary/80 transition"
           >
-            <FiCalendar className="text-xl" /> Calendario
+            <CalendarIcon
+                    className="w-5 h-5 text-black group-hover:text-primary/80"
+                /> Calendario
           </button>
 
-          <button 
-            onClick={() => handleNavigation('/ayuda')} 
-            className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors text-left ${isActive('/ayuda') ? 'bg-orange-50 text-orange-600 border-l-4 border-orange-500' : 'text-gray-600 hover:bg-gray-50'}`}
+          <button
+            onClick={() => handleNavigation('/ayuda')}
+            className="group flex items-center gap-2 px-4 py-2 rounded text-black hover:bg-primary/20 hover:text-primary/80 transition"
           >
-            <FiHelpCircle className="text-xl" /> Ayuda
+            <HelpCenterIcon
+                        className="w-5 h-5 text-black group-hover:text-primary/80"
+                    />Ayuda
           </button>
         </nav>
       </div>
 
       {/* CERRAR SESIÓN */}
       <div className="p-4 border-t border-gray-200">
-        <button 
+        <button
           onClick={() => handleNavigation('/logout-user')}
           className="flex items-center gap-3 px-4 py-3 w-full rounded-lg font-medium text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors text-left"
         >
-          <FiLogOut className="text-xl" /> Cerrar sesión
+          <LogoutIcon
+                    className="w-5 h-5 text-black group-hover:text-primary/80"
+                /> Cerrar sesión
         </button>
       </div>
     </div>

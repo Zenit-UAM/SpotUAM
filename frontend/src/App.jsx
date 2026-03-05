@@ -5,6 +5,9 @@ import Login from "./pages/Login.jsx";
 import Logout from "./pages/Logout.jsx";
 import Dashboard from "./pages/Dashboard.jsx"
 import Reservar from "./pages/Reservar.jsx"
+import Historial from "./pages/Historial.jsx"
+import Calendario from "./pages/Calendario.jsx"
+import Ayuda from "./pages/Ayuda.jsx"
 import {MainLayout} from "./layouts/MainLayout.jsx"
 import { EVENTS } from "./consts.js";
 import { useEffect, useState } from "react";
@@ -31,6 +34,7 @@ function App() {
       {currentPath === "/home" && <Inicio />}
       {currentPath === "/logout" && <Logout />}
       {currentPath === "/login" && <Login/>}
+      {/* ----------------------------------*/}
       {currentPath === "/dashboard" && (
         <MainLayout>
           {/* El Dashboard es el "children" que se inyecta en el layout*/}
@@ -41,6 +45,21 @@ function App() {
       {currentPath === "/reservar" &&(
         <MainLayout>
             <Reservar/>
+        </MainLayout>
+      )}
+      {currentPath === "/mis-reservas" &&(
+        <MainLayout>
+            <Historial/>
+        </MainLayout>
+      )}
+      {currentPath === "/calendario" &&(
+        <MainLayout>
+          <Calendario/>
+        </MainLayout>
+      )}
+      {currentPath === "/ayuda" &&(
+        <MainLayout>
+          <Ayuda/>
         </MainLayout>
       )}
       </>

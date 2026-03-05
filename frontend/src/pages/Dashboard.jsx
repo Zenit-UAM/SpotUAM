@@ -1,20 +1,10 @@
-import { Card, Button, Form, InputGroup } from "react-bootstrap";
-import { navigate } from "../Link.jsx";
 export default function Dashboard() {
-  const irPaginaLogout = () => {
-    navigate("/logout-user", { protectedRoute: true });
-  };
+
   return (
     <main>
-      <div>
-        <div>
-          <div>
-            <h1>Hola mundo, desde el Inicio.jsx</h1>
-          </div>
-          <Button variant="primary" onClick={irPaginaLogout}>
-            Boton para cerrar sesion
-          </Button>
-        </div>
+      <div className="p-6 bg-white rounded-xl shadow-sm">
+        <h1 className="text-2xl font-bold text-gray-800">Inicio - Dashboard</h1>
+        <p className="text-gray-600">Información principal.</p>
       </div>
     </main>
   );
