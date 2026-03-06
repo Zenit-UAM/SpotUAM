@@ -13,7 +13,10 @@ export default function Registro() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const passwordsMatch = password === confirmPassword;
+
   const showErrorMessage = confirmPassword.length > 0 && !passwordsMatch;
+
+
   const enviarRegistroUsuario = async (e) => {
     e.preventDefault();
 
@@ -154,12 +157,14 @@ export default function Registro() {
               )}
             </div>
 
-            <button className="bg-primary text-white py-2 rounded-xl mt-1">
+            <button  
+              disabled={!password || !passwordsMatch }  
+              className="bg-primary text-white py-2 rounded-xl mt-1 disabled:bg-gray-400 disabled:cursor-not-allowed">
               Registrar
             </button>
 
             <a 
-              href=""
+              href="#"
               onClick={() => {navigate("/login")}} 
               className="text-primary text-sm text-center">
               ¿Ya tienes cuenta? Inicia Sesión
