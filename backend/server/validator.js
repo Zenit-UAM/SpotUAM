@@ -2,10 +2,11 @@ import bcrypt from "bcrypt";
 import { pool } from "../database/db.js";
 
 export class UserRepository {
-  static async create({ username, email, password }) {
+  static async create({ username, email, password, studentID }) {
     Validation.username(username);
     Validation.email(email);
     Validation.password(password);
+    Validation.studentID(studentID);
 
     const userExists = await pool.query(
       "SELECT * FROM users WHERE email = $1",
@@ -18,8 +19,8 @@ export class UserRepository {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await pool.query(
-      "INSERT INTO users(id_user, username, email, hashedPassword) VALUES($1,$2,$3,$4) RETURNING id_user, username, email",
-      [id, username, email, hashedPassword],
+      "INSERT INTO users(id_user, username, student_id ,email, hashedPassword) VALUES($1,$2,$3,$4,$5) RETURNING id_user, student_id,username, email",
+      [id, username,studentID,email, hashedPassword],
     );
     return newUser.rows[0];
   }
@@ -75,6 +76,17 @@ class Validation {
     if (username.length < 3) {
       throw new Error("The username must be at least 3 characters long");
     }
+  }
+  static studentID(studentID){
+    const regex = /[0-9]/;
+    if(!regex.test(studentID)){
+      throw new Error("The student ID must be a number");
+    }
+    /* Por ahora se quita, para que la matricula no sea tan larga
+    if(studentID.length != 10){
+      throw new Error("The student ID must be 10 numbers long")
+    }
+    */
   }
   static email(email) {
     if (typeof email !== "string") {

@@ -51,13 +51,13 @@ app.get("/", authHydrate, (req, res) => {
 });
 
 app.post("/register", async (req, res) => {
-  const { username, email, password } = req.body; // se lee el body con la informacion paa mandar a la BD
+  const { username, email, password,studentID } = req.body; // se lee el body con la informacion paa mandar a la BD
   try {
-    const user = await UserRepository.create({ username, email, password });
+    const user = await UserRepository.create({ username, email, password,studentID });
     // La base de datos regresa el id,username e email
     console.log("Nuevo usuario creado con exito");
     // res.json({user.id_user, user.username, user.email})
-    res.json({ id: user.id_user, username: user.username, email: user.email });
+    res.json({ id: user.id_user, username: user.username, studentID: user.studentID,email: user.email });
     console.log(user);
   } catch (error) {
     return res.status(400).json({ error: error.message });
@@ -74,7 +74,7 @@ app.post("/login", async (req, res) => {
     // Este es el token
     // Se crea el token para la verificacion del usuario
     const accessToken = jwt.sign(
-      { id: user.id_user, username: user.username , email: user.email},
+      { id: user.id_user, username: user.username , studentID: user.studentID, email: user.email},
       process.env.ACCESS_SECRET_JWT_KEY,
       {
         expiresIn: "1h",
