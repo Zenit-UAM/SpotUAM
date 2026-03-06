@@ -31,11 +31,10 @@ function App() {
     <>
       {/* RUTAS PÚBLICAS (No necesitan el menú lateral ni superior) */}
       {currentPath === "/" && <Registro />}
-      {currentPath === "/home" && <Inicio />}
       {currentPath === "/logout" && <Logout />}
       {currentPath === "/login" && <Login/>}
       {/* ----------------------------------*/}
-      {currentPath === "/dashboard" && (
+      {(currentPath === "/dashboard" || currentPath === "/home") && (
         <MainLayout>
           {/* El Dashboard es el "children" que se inyecta en el layout*/}
           <Dashboard/>
