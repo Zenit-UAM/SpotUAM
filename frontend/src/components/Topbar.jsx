@@ -1,7 +1,26 @@
+import { useEffect, useState } from 'react';
 import { FiSearch, FiBell, FiChevronDown } from 'react-icons/fi';
 
 // Recibimos la "prop" titulo. Si no nos mandan nada, por defecto dirá "Dashboard"
 export const Topbar = ({ titulo = "Dashboard" }) => {
+
+  const [user, setUser] = useState(null);
+  const primerNombre = user?.username?.split(" ")[0] || "Usuario";
+  useEffect(() =>{
+    fetch("http://localhost:3000/verification",{
+      method: "GET",
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if(data.ok){
+          setUser(data.user);
+        }
+     })
+     .catch((err) => console.error("Error al verificar sesión",err))
+  },[])
+
+
   return (
     <div className="h-20 bg-white border-b border-gray-200 flex justify-between items-center px-8 w-full">
       
@@ -34,12 +53,14 @@ export const Topbar = ({ titulo = "Dashboard" }) => {
         {/* 4. Perfil de Usuario */}
         <button className="flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors cursor-pointer">
           <div className="text-right hidden md:block">
-            <p className="font-bold text-sm text-gray-800 leading-none">Daniel</p>
+            <p className="font-bold text-sm text-gray-800 leading-none">
+              {user ? primerNombre : "Cargando..."}
+            </p>
             <p className="text-xs text-gray-500 mt-1">Estudiante</p>
           </div>
           {/* Círculo con la inicial del usuario */}
           <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg">
-            D
+            {user ? user.username?.charAt(0).toUpperCase() : "?"}
           </div>
           <FiChevronDown className="text-gray-500" />
         </button>

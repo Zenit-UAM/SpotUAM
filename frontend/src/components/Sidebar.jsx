@@ -97,7 +97,7 @@ export const Sidebar = () => {
       {/* CERRAR SESIÓN */}
       <div className="p-4 border-t border-gray-200">
         <button
-          onClick={() => handleNavigation('/logout-user')}
+          onClick={() => handleNavigation('/logout')}
           className="flex items-center gap-3 px-4 py-3 w-full rounded-lg font-medium text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors text-left"
         >
           <LogoutIcon

@@ -74,7 +74,7 @@ app.post("/login", async (req, res) => {
     // Este es el token
     // Se crea el token para la verificacion del usuario
     const accessToken = jwt.sign(
-      { id: user.id_user, username: user.email },
+      { id: user.id_user, username: user.username , email: user.email},
       process.env.ACCESS_SECRET_JWT_KEY,
       {
         expiresIn: "1h",
