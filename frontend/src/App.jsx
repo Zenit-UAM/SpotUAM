@@ -2,7 +2,6 @@ import "./App.css";
 // Tus páginas públicas
 import Registro from "./pages/Registro.jsx";
 import Login from "./pages/Login.jsx";
-import Logout from "./pages/Logout.jsx";
 import Dashboard from "./pages/Dashboard.jsx"
 import Reservar from "./pages/Reservar.jsx"
 import Historial from "./pages/Historial.jsx"
@@ -26,12 +25,10 @@ function App() {
       window.removeEventListener(EVENTS.POPSTATE, onLocationChange);
     };
   }, []);
-
   return (
     <>
       {/* RUTAS PÚBLICAS (No necesitan el menú lateral ni superior) */}
       {currentPath === "/" && <Registro />}
-      {currentPath === "/logout" && <Logout />}
       {currentPath === "/login" && <Login/>}
       {/* ----------------------------------*/}
       {(currentPath === "/dashboard" || currentPath === "/home") && (
