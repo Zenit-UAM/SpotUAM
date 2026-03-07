@@ -81,12 +81,13 @@ app.post("/login", async (req, res) => {
       },
     );
     // Esta es la cookie, es la que guarda la sesion con el token, la cookie se guarda en el navegador
+    // Esta cookie dura dos minutos 60 * 2000
     return res
       .cookie("access_token", accessToken, {
         httpOnly: true,
         secure: false,
         sameSite: "strict",
-        maxAge: 60 * 2000,
+        maxAge: 60 * 2000, 
       })
       .status(201)
       .json({
