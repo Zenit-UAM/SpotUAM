@@ -81,13 +81,13 @@ app.post("/login", async (req, res) => {
       },
     );
     // Esta es la cookie, es la que guarda la sesion con el token, la cookie se guarda en el navegador
-    // Esta cookie dura dos minutos 60 * 2000
+    // Esta cookie dura dos minutos maxAge: 60 * 2000, y esta dura 8 horas maxAge: 8 * 60 * 60 * 1000
     return res
       .cookie("access_token", accessToken, {
         httpOnly: true,
         secure: false,
         sameSite: "strict",
-        maxAge: 60 * 2000, 
+        maxAge: 8 * 60 * 60 * 1000,
       })
       .status(201)
       .json({
@@ -98,7 +98,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/logout", requireAuth, async (req, res) => {
+app.post("/logout",async (req, res) => {
   res.clearCookie("access_token").json({ message: "Logout sucessful" });
 });
 
