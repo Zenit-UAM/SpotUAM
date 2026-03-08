@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { navigate } from "../Link.jsx";
+import { registerUser } from "../services/auth.js";
 import logo from "../assets/logouamcuaji.png";
 export default function Registro() {
   const [username, setName] = useState("");
@@ -19,22 +20,8 @@ export default function Registro() {
 
   const enviarRegistroUsuario = async (e) => {
     e.preventDefault();
-
-    const data = { username, email, password, studentID };
-
     try {
-      const response = await fetch("http://localhost:3000/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      const resultado = await response.json(); // Leer la respuesta del servidor
-      if (!response.ok) {
-        // alert("Error: " + resultado.error);
-        throw new Error(resultado.error || "Error al enviar");
-      }
-      alert(`Bienvenido ${resultado.username}, tu cuenta ha sido creada`);
+      await registerUser(username, studentID, email, password);
       navigate("/login");
     } catch (error) {
       console.error("Error en el registro:", error);

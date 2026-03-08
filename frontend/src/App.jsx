@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
+
   useEffect(() => {
     const onLocationChange = () => {
       setCurrentPath(window.location.pathname);

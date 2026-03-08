@@ -8,7 +8,7 @@ import HistoryIcon from "../components/icons/HistoryIcon"
 import HelpCenterIcon from "../components/icons/HelpCenterIcon"
 import LogoutIcon from "../components/icons/LogoutIcon"
 import { LogoutModal } from './LogoutModal.jsx';
-
+import { logoutUser } from '../services/auth.js';
 import { useState } from 'react';
 
 export const Sidebar = () => {
@@ -22,18 +22,9 @@ export const Sidebar = () => {
   const logoutUsuario = async (e) => {
     // Se hace la solicitud para cerrar sesion
     try {
-      const response = await fetch("http://localhost:3000/logout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-
-      if (!response.ok) {
-        throw new Error(response.error);
-      }
+      await logoutUser();
       setIsModalOpen(false);
-      alert("Sesion cerrada exitosamente");
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       alert(error.message);
     }

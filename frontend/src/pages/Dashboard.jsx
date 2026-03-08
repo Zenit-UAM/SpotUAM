@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import imagen from "../assets/imagenR.jpg"
 import { navigate } from '../Link.jsx';
-
+import { verifySession } from "../services/auth.js";
 export default function Dashboard() {
 
   const handleNavigation = (path) => {
@@ -16,17 +16,18 @@ export default function Dashboard() {
   const [user, setUser] = useState(null);
   const primerNombre = user?.username?.split(" ")[0] || "Usuario";
   useEffect(() =>{
-    fetch("http://localhost:3000/verification",{
-      method: "GET",
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if(data.ok){
-          setUser(data.user);
+    const cargarDatos = async () => {
+      try{
+        const respuesta = await verifySession();
+        
+        if(respuesta.ok){
+          setUser(respuesta.user)
         }
-     })
-     .catch((err) => console.error("Error al verificar sesión",err))
+      }catch(error){
+        console.error("Error al verificar sesión",error);
+      }
+    }
+    cargarDatos();
   },[])
   return (
       <main className="max-w-7xl mx-auto p-6">
