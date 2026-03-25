@@ -17,6 +17,8 @@ export default function Registro() {
 
   const showErrorMessage = confirmPassword.length > 0 && !passwordsMatch;
 
+  const [registerError, setRegisterError] = useState("");
+const [showRegisterError, setShowRegisterError] = useState(false);
 
   const enviarRegistroUsuario = async (e) => {
     e.preventDefault();
@@ -25,7 +27,10 @@ export default function Registro() {
       navigate("/login");
     } catch (error) {
       console.error("Error en el registro:", error);
-      alert(error.message);
+      const backendMessage =
+        error?.response?.data?.error || "No se pudo completar el registro";
+      setRegisterError(backendMessage);
+      setShowRegisterError(true);
     }
   };
 
@@ -104,7 +109,7 @@ export default function Registro() {
             <div className="space-y-4">
               {/* Contenedor Flex para ponerlos en la misma línea */}
               <div className="flex flex-col md:flex-row gap-4">
-                
+
                 {/* Columna Contraseña */}
                 <div className="flex-1 flex flex-col items-start">
                   <label className="mb-1 text-sm font-semibold">Contraseña</label>
@@ -144,15 +149,15 @@ export default function Registro() {
               )}
             </div>
 
-            <button  
-              disabled={!password || !passwordsMatch }  
+            <button
+              disabled={!password || !passwordsMatch }
               className="bg-primary text-white py-2 rounded-xl mt-1 disabled:bg-gray-400 disabled:cursor-not-allowed">
               Registrar
             </button>
 
-            <a 
+            <a
               href="#"
-              onClick={() => {navigate("/login")}} 
+              onClick={() => {navigate("/login")}}
               className="text-primary text-sm text-center">
               ¿Ya tienes cuenta? Inicia Sesión
             </a>
@@ -188,6 +193,24 @@ export default function Registro() {
 
         </div>
       </footer>
+      {showRegisterError && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+          <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg">
+            <h2 className="text-lg font-bold text-red-600">Error en el registro</h2>
+            <p className="mt-2 text-sm text-gray-700">{registerError}</p>
+
+            <div className="mt-5 flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => setShowRegisterError(false)}
+                className="rounded-lg bg-primary px-4 py-2 text-white"
+              >
+                Entendido
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

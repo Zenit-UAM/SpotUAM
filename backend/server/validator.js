@@ -36,7 +36,7 @@ export class UserRepository {
 
     if (userExists.rows.length === 0) {
       // Corregido: 0 en lugar de 1
-      throw new Error("The user doesn't exist");
+      throw new Error("El usuario no existe");
     }
 
     const user = userExists.rows[0];
@@ -56,7 +56,7 @@ export class UserRepository {
 
     const isCorrectPassword = await bcrypt.compare(password, hash);
 
-    if (!isCorrectPassword) throw new Error("Invalid credentials");
+    if (!isCorrectPassword) throw new Error("Contraseña incorrecta");
 
     // Quitamos la contraseña del objeto antes de devolverlo
     const {
@@ -71,31 +71,30 @@ export class UserRepository {
 class Validation {
   static username(username) {
     if (typeof username !== "string") {
-      throw new Error("The username must be a string");
+      throw new Error("El nombre debe ser una cadena");
     }
     if (username.length < 3) {
-      throw new Error("The username must be at least 3 characters long");
+      throw new Error("El nombre debe ser completo");
     }
   }
   static studentID(studentID){
     const regex = /[0-9]/;
     if(!regex.test(studentID)){
-      throw new Error("The student ID must be a number");
+      throw new Error("La matrícula debe ser un número");
     }
-    /* Por ahora se quita, para que la matricula no sea tan larga
     if(studentID.length != 10){
-      throw new Error("The student ID must be 10 numbers long")
+      throw new Error("La matrícula debe tener 10 caracteres")
     }
-    */
+
   }
   static email(email) {
     if (typeof email !== "string") {
-      throw new Error("The email must be a string");
+      throw new Error("El email debe ser una cadena");
     }
     // regex para verificar si el correo es de la uam cuajimalpa
     const regex = /^[a-zA-Z0-9._%+-]+@cua\.uam\.mx$/;
     if (!regex.test(email)) {
-      throw new Error("The email must contain @cua.uam.mx");
+      throw new Error("El formato debe ser el siguiente: @cua.uam.mx");
     }
   }
   static password(password) {
