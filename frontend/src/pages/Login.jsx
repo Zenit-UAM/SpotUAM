@@ -2,11 +2,13 @@ import { useState } from "react";
 import { navigate } from "../Link.jsx";
 import logo from "../assets/logouamcuaji.png";
 import { loginUser } from "../services/auth.js";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 // JSX PARA PROBAR LOS ESTILOS.
 export default function Login() {
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const loginUsuario = async (e) => {
     e.preventDefault();
@@ -70,15 +72,26 @@ export default function Login() {
             </div>
             <div className="flex flex-col items-start">
               <label className="mb-1 text-sm font-semibold">Contraseña</label>
-              <input
-                type="password"
-                className="w-full shadow-md border border-gray-300 rounded-xl px-4 py-2"
-                placeholder="***********"
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
+              <div className="relative w-full">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="w-full shadow-md border border-gray-300 rounded-xl px-4 py-2 pr-10"
+                  placeholder="***********"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-2.5 text-gray-600 hover:text-gray-800 cursor-pointer"
+                  aria-label="Toggle password visibility"
+                >
+                  {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                </button>
+              </div>
             {/* DIV PARA EL CHECKBOX DE SESION*/}
+            </div>
+            
             <div className="flex items-center gap-2">
               <input
                 type="checkbox"
