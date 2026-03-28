@@ -1,41 +1,46 @@
 import { useEffect, useState } from 'react';
 import { FiSearch, FiBell, FiChevronDown } from 'react-icons/fi';
+import { verifySession } from "../services/auth.js"; 
+import { navigate } from "../Link.jsx"; // <-- 1. Importante para movernos de página
 
-// Recibimos la "prop" titulo. Si no nos mandan nada, por defecto dirá "Dashboard"
-export const Topbar = ({ titulo = "Dashboard" }) => {
-
+export const Topbar = ({ titulo = "Dashboard", onSearch }) => {
   const [user, setUser] = useState(null);
+  const [busqueda, setBusqueda] = useState(""); 
+
   const primerNombre = user?.username?.split(" ")[0] || "Usuario";
-  useEffect(() =>{
-    fetch("http://localhost:3000/verification",{
-      method: "GET",
-      credentials: "include",
-    })
-      .then((res) => res.json())
+
+  useEffect(() => {
+    verifySession()
       .then((data) => {
-        if(data.ok){
-          setUser(data.user);
-        }
-     })
-     .catch((err) => console.error("Error al verificar sesión",err))
-  },[])
+        if (data.ok) setUser(data.user);
+      })
+      .catch((err) => console.error("Error al verificar sesión", err));
+  }, []);
+
+    // 3. Función para procesar la búsqueda al dar Enter  
+    const ejecutarBusqueda = (e) => {
+    if (e.key === 'Enter' && busqueda.trim() !== "") {
+      // Esto llevará al usuario a una URL como: /buscar?q=545
+      navigate(`/buscar?q=${encodeURIComponent(busqueda)}`);
+      setBusqueda(""); 
+    }
+  };
 
 
   return (
     <div className="h-20 bg-white border-b border-gray-200 flex justify-between items-center px-8 w-full">
-      
-      {/* TÍTULO DINÁMICO */}
       <h2 className="text-2xl font-bold text-gray-800">{titulo}</h2>
 
-      {/* CONTROLES DERECHOS */}
       <div className="flex items-center gap-6">
-        
-        {/* 1. Buscador */}
+        {/* BUSCADOR */}
         <div className="relative">
           <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
           <input 
             type="text" 
             placeholder="Buscar espacios..." 
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)} // Actualiza el estado
+            onKeyDown={ejecutarBusqueda} // Escucha el "Enter"
             className="bg-gray-100 text-gray-700 pl-10 pr-4 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-primary w-72 transition-all"
           />
         </div>

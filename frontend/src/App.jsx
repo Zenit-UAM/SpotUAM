@@ -1,5 +1,6 @@
 import "./App.css";
 // Tus páginas públicas
+import Resultados from "./pages/Resultados.jsx";
 import Registro from "./pages/Registro.jsx";
 import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.jsx"
@@ -10,6 +11,7 @@ import Ayuda from "./pages/Ayuda.jsx"
 import {MainLayout} from "./layouts/MainLayout.jsx"
 import { EVENTS } from "./consts.js";
 import { useEffect, useState } from "react";
+
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -59,6 +61,13 @@ function App() {
           <Ayuda/>
         </MainLayout>
       )}
+
+      {/* RUTA DE BÚSQUEDA: Para localizar espacios específicos */}
+      {currentPath === "/buscar" && (
+        <MainLayout>
+          <Resultados />
+        </MainLayout>
+      )}s
       </>
   );
 }
