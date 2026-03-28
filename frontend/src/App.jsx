@@ -1,6 +1,6 @@
+import Resultados from "./pages/Resultados.jsx";
 import "./App.css";
 // Tus páginas públicas
-import Resultados from "./pages/Resultados.jsx";
 import Registro from "./pages/Registro.jsx";
 import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.jsx"
